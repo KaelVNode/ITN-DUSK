@@ -3,11 +3,17 @@
 ## Membuat Wallet
 
 ➖ Buat New Wallet : https://wallet.dusk.network/setup/
+
 ➖ Back Up Pharse dan Masukan Lagi (Backup)
+
 ➖ Next Next Aja dan Copy Address
+
 ➖ Claim Faucet : https://faucet.dusk.network/ (Kalo Faucet Down Coba LAgi Nanti)
+
 ➖ Buat Postingan di Twitter : Address-Kalian $DUSK #ITN
+
 ➖ Salin Link Tweet Kalian dan Paste ke Faucet
+
 ➖ Klik Send Dusk
 
 ## Open Port 
