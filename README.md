@@ -1,5 +1,15 @@
 #  Node Running Guide Dusk ITN 
 
+
+## Perangkat Keras
+
+|  Komponen |  Persyaratan Minimum |
+| ------------ | ------------ |
+| CPU  |  4-core  |
+| RAM | 2 GB  |
+| Penyimpanan  | 500 GB HDD |
+|  OS  | Ubuntu 22 |
+
 ## Membuat Wallet
 
 ➖ Buat New Wallet : https://wallet.dusk.network/setup/
