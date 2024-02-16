@@ -1,232 +1,58 @@
-# Tutorial testnet Q-Blockchain Airdrop Finder
+Node Running Guide Dusk ITN (Tinggal Paste Paste Doang)
 
-<p style="font-size:14px" align="right">
-<a href="https://t.me/airdropfind" target="_blank">Join Telegram Airdrop Finder<img src="https://user-images.githubusercontent.com/50621007/183283867-56b4d69f-bc6e-4939-b00a-72aa019d1aea.png" width="30"/></a>
-</p>
+1️⃣# Membuat Wallet
 
-<p align="center">
-  <img height="auto" width="auto" src="https://raw.githubusercontent.com/bayy420-999/airdropfind/main/NavIcon.png">
-</p>
+➖ Buat New Wallet : https://wallet.dusk.network/setup/
+➖ Back Up Pharse dan Masukan Lagi (Backup)
+➖ Next Next Aja dan Copy Address
+➖ Claim Faucet : https://faucet.dusk.network/ (Kalo Faucet Down Coba LAgi Nanti)
+➖ Buat Postingan di Twitter : Address-Kalian $DUSK #ITN
+➖ Salin Link Tweet Kalian dan Paste ke Faucet
+➖ Klik Send Dusk
 
-## Referensi
+2️⃣# Open Port 
 
-[Dokumen resmi](https://docs.qtestnet.org/how-to-setup-validator/)
+sudo ufw allow 22
+sudo ufw allow 8080/tcp
+sudo ufw allow 9000/udp
+sudo ufw enable
 
-[Faucet](https://faucet.qtestnet.org/)
+3️⃣# Install Github
 
-[Explorer](https://explorer.qtestnet.org/)
+curl --proto '=https' --tlsv1.2 -sSfL https://github.com/dusk-network/itn-installer/releases/download/v0.1.0/itn-installer.sh | sudo sh
 
-[Status validator](https://stats.qtestnet.org/)
+4️⃣# Import Pharse Wallet
 
-[Server discord](https://discord.gg/GHPkcEAB)
+rusk-wallet restore
 
-## Spesifikasi
+Paste Pharse Kalian (Pastikan Huruf Kecil Semua)
 
-### Persyaratan perangkat keras
+Masukan Password Bebas 2x
 
-| Komponen | Spesifikasi minimal |
-|----------|---------------------|
-|CPU|Intel Core i3 or i5|
-|RAM|4 GB DDR4 RAM|
-|Penyimpanan|500 GB HDD|
-|Koneksi|100 Mbit/s port|
+5️⃣# Jalankan Kode di Bawah
 
-| Komponen | Spesifikasi rekomendasi |
-|----------|---------------------|
-|CPU|Intel Core i7-8700 Hexa-Core|
-|RAM|64 GB DDR4 RAM|
-|Penyimpanan|2 x 1 TB NVMe SSD|
-|Koneksi|1 Gbit/s port|
+rusk-wallet export -d /opt/dusk/conf -n consensus.keys
 
-### Persyaratan perangkat lunak
+Masukan Password Lagi 2x
 
-| Komponen | Spesifikasi minimal |
-|----------|---------------------|
-|Sistem Operasi|Ubuntu 16.04|
+sh /opt/dusk/bin/setup_consensus_pwd.sh
 
-| Komponen | Spesifikasi rekomendasi |
-|----------|---------------------|
-|Sistem Operasi|Ubuntu 18.04 atau lebih tinggi|
+Masukan Password Lagi Samain Aja
 
-## Pasang dan Jalankan validator
+6️⃣# Start Node
 
-### Pasang dependensi
+service rusk start
 
-```
-apt install git docker docker-compose
-```
+7️⃣# Check Log Node
 
-### Unduh paket Q-Blockchain
+grep "block accepted" /var/log/rusk.log
 
-```
-git clone https://gitlab.com/q-dev/testnet-public-tools.git
-```
+8️⃣ # Check Wallet
 
-### Masuk ke folder `testnet-validator`
+rusk-wallet
 
-```
-cd testnet-public-tools/testnet-validator
-```
+➖ Pilih Acces Your Wallet dan Enter
+➖ Masukan Password (Pastikan Address Kalian Sama Dengan Yang di Website)
+➖ Gunakan Arah Atas Bawa Untuk Pindah Menu dan Enter Untuk Eksekusi
 
-### Buat kata sandi dompet
-
-Kata sandi harus disimpan di folder `keystore`, jadi anda perlu membuat foldernya terlebih dahulu dengan perintah
-
-```
-mkdir keystore
-```
-
-Lalu buat file `pwd.txt` dan isi dengan kata sandi anda (kata sandi bebas)
-
-```
-nano keystore/pwd.txt
-```
-
-Setelah memasukan kata sandi, tekan <kbd>CTRL</kbd> + <kbd>x</kbd> + <kbd>Y</kbd> lalu tekan <kbd>Enter</kbd>
-
-Kemudian cek apakah kata sandi telah tersimpan
-
-```
-cat keystore/pwd.txt
-```
-
-> Jika kata sandi yang anda buat tadi tampil ke layar artinya kata sandi telah berhasil dibuat
-
-### Buat dompet
-
-```
-docker run --entrypoint="" --rm -v $PWD:/data -it qblockchain/q-client:testnet geth account new --datadir=/data --password=/data/keystore/pwd.txt
-```
-
-Jika berhasil maka pesan seperti ini akan tampil di layar
-
-```
-Your new key was generated
-
-Public address of the key:   0xb3FF24F818b0ff6Cc50de951bcB8f86b52287dac
-Path of the secret key file: /data/keystore/UTC--2021-01-18T11-36-28.705754426Z--b3ff24f818b0ff6cc50de951bcb8f86b52287dac
-
-- You can share your public address with anyone. Others need it to interact with you.
-- You must NEVER share the secret key with anyone! The key controls access to your funds!
-- You must BACKUP your key file! Without the key, it's impossible to access account funds!
-- You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
-```
-
-Lalu simpan public keynya
-
-### Klaim faucet
-
-Pergi ke [sini](https://faucet.qtestnet.org/) lalu masukan alamat dompet yang tadi anda buat dan klaim Q Token
-
-> jika terjadi error maka ulangi terus sampai dapat, anda juga bisa klaim token yang lain
-
-### Konfigurasi `.env`
-
-Jalankan perintah ini
-
-```
-nano .env
-```
-
-Lalu ganti variabel dibawah
-
-| Variabel | Keterangan |
-|----------|------------|
-|ADDRESS|Ganti dengan alamat dompet tadi lalu hilangkan 0x)|
-|IP|Ganti dengan alamat IP VPS anda (yang digunakan untuk login VPS)|
-
-Setelah itu tekan <kbd>CTRL</kbd> + <kbd>x</kbd> + <kbd>Y</kbd> lalu tekan <kbd>Enter</kbd>
-
-### Konfigurasi `config.json`
-
-Jalankan perintah ini
-
-```
-nano config.json
-```
-
-Lalu ganti address dan password dengan alamat dompet dan kata sandi anda
-
-contoh:
-
-```js
-{
-  "address": "ganti addressmu + hapus 0x didepan",
-  "password": "Passwordmu",
-  "keystoreDirectory": "/data",
-  "rpc": "https://rpc.qtestnet.org"
-}
-
-```
-
-Setelah itu tekan <kbd>CTRL</kbd> + <kbd>x</kbd> + <kbd>Y</kbd> lalu tekan <kbd>Enter</kbd>
-
-### Taruh stake di validator contract
-
-```
-docker run --rm -v $PWD:/data -v $PWD/config.json:/build/config.json qblockchain/js-interface:testnet validators.js
-```
-
-### Daftarkan validator
-
-Jalankan perintah ini
-
-```
-nano docker-compose.yaml
-```
-
-lalu dibagian `entrypoint` setelah `geth` tambahkan ini
-
-```
-"--ethstats=NAMA_VALIDATOR:TESTNET_ACCESS_KEY@stats.qtestnet.org",
-```
-
-Untuk mendapatkan `TESTNET_ACCESS_KEY` anda bisa tanyakan ke grup discordnya
-
-Setelah itu tekan <kbd>CTRL</kbd> + <kbd>x</kbd> + <kbd>Y</kbd> lalu tekan <kbd>Enter</kbd>
-
-### Jalankan validator
-
-Jalankan perintah dibawah untuk menjalankan validator
-
-```
-docker-compose up -d
-```
-
-Lalu cek log
-
-```
-docker-compose logs -f --tail "100"
-```
-
-Cari nama validator anda [disini](https://stats.qtestnet.org/)
-
-### Mengupdate Q-Client
-
-Pergi ke folder `testnet-validator`
-
-```
-cd $HOME/testnet-public-tools/testnet-validator
-```
-
-Update konfigurasi terbaru
-
-```
-git stash && git pull
-```
-
-Terapkan konfigurasi
-
-```
-git stash apply && docker-compose pull
-```
-
-Mulai ulang docker
-
-```
-docker-compose up -d
-```
-
-## Perintah berguna
-
-## Troubleshoot
+# Done, Tinggal Tunggu Tanggal 20 Untuk Task Stake Soon
