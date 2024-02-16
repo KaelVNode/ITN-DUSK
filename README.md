@@ -59,7 +59,9 @@ grep "block accepted" /var/log/rusk.log
 rusk-wallet
 ```
 ➖ Pilih Acces Your Wallet dan Enter
+
 ➖ Masukan Password (Pastikan Address Kalian Sama Dengan Yang di Website)
+
 ➖ Gunakan Arah Atas Bawa Untuk Pindah Menu dan Enter Untuk Eksekusi
 
 # Done, Tinggal Tunggu Tanggal 20 Untuk Task Stake Soon
