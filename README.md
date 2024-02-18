@@ -74,4 +74,17 @@ rusk-wallet
 
 ➖ Gunakan Arah Atas Bawa Untuk Pindah Menu dan Enter Untuk Eksekusi
 
-# Done, Tinggal Tunggu Tanggal 20 Untuk Task Stake Soon
+## Stake tDUSK
+```
+rusk-wallet stake --amt 1000 # Or however much you want to stake
+```
+## view your staking information
+```
+rusk-wallet stake-info
+```
+## To see if your node is participating in consensus and creating blocks, occasionally check
+```
+grep "execute_state_transition" /var/log/rusk.log | tail -n 5
+```
+
+
